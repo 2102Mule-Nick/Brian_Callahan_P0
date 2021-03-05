@@ -5,6 +5,53 @@ import java.util.Scanner;
 
 public class Driver {
 	
+	public static void register(Scanner scanner) {
+		System.out.println("Register an account");
+		System.out.println("Enter a username");
+		String username = scanner.next();
+		System.out.println("Enter a password");
+		String password = scanner.next();
+						
+		User user = new User(username,password);
+		UserList userlist = new UserList();
+				
+		try {
+			userlist.createUser(user);
+		} catch (UserNameTaken e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Account acc = new Account(user);
+		Menu menu = new Menu();
+		
+		menu.menu(user);
+		
+		
+	}
+	
+	public static void login(Scanner scanner) {
+		System.out.println("Login");
+		System.out.println("Enter a username");
+		String username = scanner.next();
+		System.out.println("Enter a password");
+		String password = scanner.next();
+						
+		UserList userlist = new UserList();
+		try {
+			userlist.getUser(username);
+		} catch (UserNotFound e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		/*
+		Account acc = new Account(user);
+		Menu menu = new Menu();			
+		menu.menu(user);
+		*/
+		
+	}
+	
 	public static void main(String[] args) {
 		/*
 		
@@ -18,50 +65,20 @@ public class Driver {
 		System.out.println("Would you like to login or register?");
 		String welcome = scanner.nextLine();
 		if (welcome.equals("login")) {
-			System.out.println("Login");
-			System.out.println("Enter a username");
-			String username = scanner.next();
-			System.out.println("Enter a password");
-			String password = scanner.next();
-							
-			UserList userlist = new UserList();
-			try {
-				userlist.getUser(username);
-			} catch (UserNotFound e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}	
-			/*
-			Account acc = new Account(user);
-			Menu menu = new Menu();			
-			menu.menu(user);
-			*/
+			Driver.login(scanner);
 			
 		} else if (welcome.equals("register")) {
-			System.out.println("Register an account");
-			System.out.println("Enter a username");
-			String username = scanner.next();
-			System.out.println("Enter a password");
-			String password = scanner.next();
-							
-			User user = new User(username,password);
-			UserList userlist = new UserList();
-					
-			try {
-				userlist.createUser(user);
-			} catch (UserNameTaken e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			Driver.register(scanner);
 			
-			Account acc = new Account(user);
-			Menu menu = new Menu();
-			
-			menu.menu(user);
+		}
+		System.out.println("would you like to login?");
+		String login = scanner.nextLine();
+		if (login.equalsIgnoreCase("y")) {
+			Driver.login(scanner);
 			
 		}
 		
-		System.out.println("Ended");
+		//System.out.println("Ended");
 		
 	}
 }

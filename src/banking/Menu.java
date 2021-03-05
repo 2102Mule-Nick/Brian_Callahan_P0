@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Menu {
 
 public void menu(User user) {
+		String choice ="";
 		Account acc = new Account(user); 
 		
 		Scanner scanner = new Scanner(System.in);		
@@ -16,8 +17,6 @@ public void menu(User user) {
 		System.out.println("C: Withdraw");
 		System.out.println("D: Transactions");
 		System.out.println("E: Exit");
-		
-		String choice ="";
 		
 		do {
 		
@@ -41,14 +40,13 @@ public void menu(User user) {
 		case "D": //transactions
 			System.out.println("Transactions: "+acc.transactions);
 			break;
-
 		case "E": //exit
 			System.out.println("Exiting");
 			break;	
 		default:
 			System.out.println("Please type a valid input");					
 		}	
-		}while (choice!="E");
+		}while (!choice.equalsIgnoreCase("E"));
 		
 		
 	}
