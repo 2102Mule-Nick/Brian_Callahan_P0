@@ -1,3 +1,4 @@
+package banking;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -27,6 +28,7 @@ public class Driver {
 		//System.out.println(user);
 		 
 		 */
+		/*
 		Scanner scanner = new Scanner(System.in);	
 		User use = new User();
 		AccountBalance acc = new AccountBalance();
@@ -52,11 +54,34 @@ public class Driver {
 		
 		System.out.println(use.getUsername()+" "+use.getPassword()+" "+acc.getBalance());
 		
-		/*
+		
 		for(User x : userList) {
 			System.out.println(x.toString());
 		}
 		*/
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Register an account");
+		System.out.println("Enter a username");
+		String username = scanner.next();
+		System.out.println("Enter a password");
+		String password = scanner.next();
+			
+		
+		User user = new User(username,password);
+		UserList userlist = new UserList();
+				
+		try {
+			userlist.createUser(user);
+		} catch (UserNameTaken e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Account acc = new Account(user);
+		Menu menu = new Menu();
+		
+		menu.menu(user);
+		System.out.println("Ended");
 		
 	}
 }
