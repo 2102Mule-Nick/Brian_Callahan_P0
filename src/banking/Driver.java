@@ -21,10 +21,7 @@ public class Driver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		Account acc = new Account(user);
-		Menu menu = new Menu();
-		
+		Menu menu = new Menu();		
 		menu.menu(user);
 		
 		
@@ -40,26 +37,17 @@ public class Driver {
 		UserList userlist = new UserList();
 		try {
 			userlist.getUser(username);
+			User user = new User(username,password);
+			Menu menu = new Menu();			
+			menu.menu(user);
 		} catch (UserNotFound e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
-		/*
-		Account acc = new Account(user);
-		Menu menu = new Menu();			
-		menu.menu(user);
-		*/
+		}
 		
 	}
 	
 	public static void main(String[] args) {
-		/*
-		
-		System.out.println("Would you like to login/register: Y or N?");
-		Scanner scanner = new Scanner(System.in);			
-		String welcome = scanner.nextLine();
-		*/
-		
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Welcome to the personal banking app");
 		System.out.println("Would you like to login or register?");
@@ -71,14 +59,17 @@ public class Driver {
 			Driver.register(scanner);
 			
 		}
-		System.out.println("would you like to login?");
+		System.out.println("would you like to login? y or n");
 		String login = scanner.nextLine();
 		if (login.equalsIgnoreCase("y")) {
 			Driver.login(scanner);
 			
-		}
+		} else if (login.equalsIgnoreCase("n")) {
+			System.out.println("Good Bye");
+			
+		} 
 		
-		//System.out.println("Ended");
+		
 		
 	}
 }
