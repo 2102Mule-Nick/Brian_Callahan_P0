@@ -29,6 +29,18 @@ public class UserList {
 		}
 		*/
 	}
+	
+	public User getUser(String user) throws banking.UserNotFound{
+
+		Iterator<User> iter = userList.iterator();		
+		while (iter.hasNext()) {
+			User existingUser = iter.next();
+			if (existingUser.getUsername().equalsIgnoreCase(user)) {
+				return existingUser;
+			}
+		}	
+		throw new UserNotFound();
+	}
 	public UserList() {
 		super();
 		userList = new ArrayList<>();
