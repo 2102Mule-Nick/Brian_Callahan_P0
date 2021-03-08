@@ -7,11 +7,11 @@ public class Menu {
 	
 
 
-public void menu(User user) {
+public void menu(User user, Scanner scanner) {
 		String choice ="";
 		Account acc = new Account(user); 
 		
-		Scanner scanner = new Scanner(System.in);		
+		//Scanner scanner = new Scanner(System.in);		
 		System.out.println();
 		System.out.println("Welcome "+user.getUsername());
 		System.out.println("Select an option");

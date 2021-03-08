@@ -14,9 +14,8 @@ public class LoginMenu {
 		try {
 			User use = user.getUserByUsername(username);
 			if (username.equals(use.getUsername()) && password.equals(use.getPassword())){
-				System.out.println(use.getBalance());
 				Menu menu = new Menu();			
-				menu.menu(use);
+				menu.menu(use,scanner);
 			} else {
 				System.out.println("Password or Username incorrect");
 			}			

@@ -15,7 +15,7 @@ public void register(Scanner scanner) {
 		UserKryo kryo = new UserKryo();
 		kryo.createUser(user);
 		Menu menu = new Menu();		
-		menu.menu(user);
+		menu.menu(user,scanner);
 				
 	}
 
