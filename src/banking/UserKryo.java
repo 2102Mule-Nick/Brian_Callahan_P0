@@ -11,8 +11,6 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 
-
-
 public class UserKryo {
 	private Kryo kryo = new Kryo();
 

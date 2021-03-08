@@ -9,13 +9,9 @@ import com.esotericsoftware.kryo.io.Output;
 
 public class User {
 	
-
-	private String username;
-	
-	private String password;
-	
-	private int balance;
-	
+	private String username;	
+	private String password;	
+	private int balance;	
 	String transactions ="";
 
 	public String getTransactions() {

@@ -20,21 +20,16 @@ public class Driver {
 		kryo.createUser(user);
 		Menu menu = new Menu();		
 		menu.menu(user);
-		
-		
-		
+				
 	}
 	
-	public static void login(Scanner scanner) {
-	
-		//Logger log = Logger.getRootLogger();
-		
+	public static void login(Scanner scanner) {	
+		//Logger log = Logger.getRootLogger();		
 		System.out.println("Login");
 		System.out.println("Enter a username");
 		String username = scanner.next();
 		System.out.println("Enter a password");
-		String password = scanner.next();
-		
+		String password = scanner.next();		
 		UserKryo user = new UserKryo();		
 		try {
 			User use = user.getUserByUsername(username);
@@ -44,9 +39,7 @@ public class Driver {
 				menu.menu(use);
 			} else {
 				System.out.println("Password or Username incorrect");
-			}
-			
-			
+			}			
 		} catch (UserNotFound e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -59,23 +52,9 @@ public class Driver {
 		System.out.println("Would you like to login or register?");
 		String welcome = scanner.nextLine();
 		if (welcome.equals("login")) {
-			Driver.login(scanner);
-			
+			Driver.login(scanner);			
 		} else if (welcome.equals("register")) {
-			Driver.register(scanner);
-			
-		}
-		/*
-		System.out.println("would you like to login? y or n");
-		String login = scanner.nextLine();
-		if (login.equalsIgnoreCase("y")) {
-			Driver.login(scanner);
-			
-		} else if (login.equalsIgnoreCase("n")) {
-			System.out.println("Good Bye");
-			
-		} 
-		*/
-			
+			Driver.register(scanner);			
+		}			
 	}
 }
