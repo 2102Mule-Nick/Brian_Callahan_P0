@@ -28,7 +28,8 @@ public void menu(User user) {
 		
 		switch (choice) {
 		case "A": //balance
-			System.out.println("Balance "+acc.balance);
+			System.out.println("Balance "+user.getBalance());
+			//System.out.println("Balance "+acc.balance);
 			break;
 		case "B": //deposit
 			System.out.println("Enter an amount to deposit");

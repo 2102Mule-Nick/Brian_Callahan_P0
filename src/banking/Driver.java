@@ -40,7 +40,8 @@ public class Driver {
 		
 		try {
 			User use = user.getUserByUsername(username);
-			if (username.equals(use.getUsername()) && password.equals(use.getPassword())) {
+			if (username.equals(use.getUsername()) && password.equals(use.getPassword())){
+				System.out.println(use.getBalance());
 				Menu menu = new Menu();			
 				menu.menu(use);
 			} else {
@@ -66,6 +67,7 @@ public class Driver {
 			Driver.register(scanner);
 			
 		}
+		/*
 		System.out.println("would you like to login? y or n");
 		String login = scanner.nextLine();
 		if (login.equalsIgnoreCase("y")) {
@@ -75,6 +77,7 @@ public class Driver {
 			System.out.println("Good Bye");
 			
 		} 
+		*/
 			
 	}
 }

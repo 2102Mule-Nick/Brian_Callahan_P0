@@ -12,12 +12,18 @@ public class Account {
 	}
 	
 	public void deposit(int n) {
+		user.setBalance(user.getBalance()+n);
+		UserKryo u = new UserKryo();
+		u.createUser(user);
 		balance +=n;
 		transactions+= "Deposited: " +n+" ";
 	}
 	
 	public void withdraw(int n) {
 		if (balance>n) {
+			user.setBalance(user.getBalance()-n);
+			UserKryo u = new UserKryo();
+			u.createUser(user);
 			balance -=n;
 			transactions+= "Withdrew: " +n+" ";
 		}
