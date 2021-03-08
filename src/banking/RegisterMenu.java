@@ -14,7 +14,7 @@ public Logger getLog() {
 		}
 public void register(Scanner scanner) {
 	
-		//log.info("Registering user");
+		log.info("Registering user");
 		System.out.println("Register an account");
 		System.out.println("Enter a username");
 		String username = scanner.next();

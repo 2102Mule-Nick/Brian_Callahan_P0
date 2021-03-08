@@ -14,7 +14,7 @@ public class LoginMenu {
 	}
 	public void login(Scanner scanner) {	
 
-		//log.info("Logging in user");
+		log.info("Logging in user");
 		System.out.println("Login");
 		System.out.println("Enter a username");
 		String username = scanner.next();
