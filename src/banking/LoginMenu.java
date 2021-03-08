@@ -2,9 +2,19 @@ package banking;
 
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 public class LoginMenu {
+	Logger log;
+	public Logger getLog() {
+		return log;
+	}
+	public void setLog(Logger log) {
+		this.log = log;
+	}
 	public void login(Scanner scanner) {	
-		//Logger log = Logger.getRootLogger();		
+
+		//log.info("Logging in user");
 		System.out.println("Login");
 		System.out.println("Enter a username");
 		String username = scanner.next();
