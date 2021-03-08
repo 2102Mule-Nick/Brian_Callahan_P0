@@ -5,7 +5,6 @@ public class Account {
 	int balance;
 	String transactions ="";
 	User user;
-	int pid;
 	public Account(User user) {
 		super();
 		this.user = user;
@@ -13,20 +12,16 @@ public class Account {
 	
 	public void deposit(int n) {
 		user.setBalance(user.getBalance()+n);
+		user.setTransactions(user.getTransactions()+" Deposited: " +n+" ");
 		UserKryo u = new UserKryo();
-		u.createUser(user);
-		balance +=n;
-		transactions+= "Deposited: " +n+" ";
+		u.createUser(user);		
 	}
 	
 	public void withdraw(int n) {
-		if (balance>n) {
 			user.setBalance(user.getBalance()-n);
+			user.setTransactions(user.getTransactions()+" Withdrew: " +n+" ");
 			UserKryo u = new UserKryo();
-			u.createUser(user);
-			balance -=n;
-			transactions+= "Withdrew: " +n+" ";
-		}
+			u.createUser(user);			
 	}
 	
 	public void interest(int year) {

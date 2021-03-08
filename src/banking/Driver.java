@@ -15,7 +15,7 @@ public class Driver {
 		System.out.println("Enter a password");
 		String password = scanner.next();
 						
-		User user = new User(username,password,0);
+		User user = new User(username,password,0,"");
 		UserKryo kryo = new UserKryo();
 		kryo.createUser(user);
 		Menu menu = new Menu();		
@@ -35,9 +35,7 @@ public class Driver {
 		System.out.println("Enter a password");
 		String password = scanner.next();
 		
-		UserKryo user = new UserKryo();
-		
-		
+		UserKryo user = new UserKryo();		
 		try {
 			User use = user.getUserByUsername(username);
 			if (username.equals(use.getUsername()) && password.equals(use.getPassword())){

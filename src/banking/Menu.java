@@ -42,7 +42,7 @@ public void menu(User user) {
 			acc.withdraw(withdraw);
 			break;
 		case "D": //transactions
-			System.out.println("Transactions: "+acc.transactions);
+			System.out.println("Transactions: "+user.getTransactions());
 			break;
 		case "E": //exit
 			System.out.println("Exiting");

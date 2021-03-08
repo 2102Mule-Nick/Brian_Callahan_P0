@@ -15,6 +15,16 @@ public class User {
 	private String password;
 	
 	private int balance;
+	
+	String transactions ="";
+
+	public String getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(String transactions) {
+		this.transactions = transactions;
+	}
 
 	public String getUsername() {
 		return username;
@@ -32,11 +42,12 @@ public class User {
 		this.password = password;
 	}
 
-	public User(String username, String password, int balance) {
+	public User(String username, String password, int balance, String transactions) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.balance = balance;
+		this.transactions = transactions;
 	}
 
 	public User() {
