@@ -1,11 +1,4 @@
 package banking;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.util.Iterator;
-import java.util.List;
-
-import com.esotericsoftware.kryo.Kryo;
-import com.esotericsoftware.kryo.io.Output;
 
 public class User {
 	

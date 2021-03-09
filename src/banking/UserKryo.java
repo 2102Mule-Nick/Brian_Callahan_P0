@@ -13,11 +13,7 @@ import com.esotericsoftware.kryo.io.Output;
 
 public class UserKryo {
 	private Kryo kryo = new Kryo();
-
-	private Logger log = Logger.getRootLogger();
-	
-	private static final String FOLDER_NAME = "users\\";
-	
+	private static final String FOLDER_NAME = "users\\";	
 	private static final String FILE_EXTENSION = ".dat";
 
 public void createUser(User user){
