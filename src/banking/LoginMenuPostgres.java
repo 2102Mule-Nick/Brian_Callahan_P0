@@ -14,7 +14,7 @@ public class LoginMenuPostgres {
 	}
 	public void login(Scanner scanner) {	
 
-		log.info("Logging in user");
+		//log.info("Logging in user");
 		System.out.println("Login");
 		System.out.println("Enter a username");
 		String username = scanner.next();
@@ -29,8 +29,9 @@ public class LoginMenuPostgres {
 				menu.menu(use,scanner);
 			} else {
 				System.out.println("Password or Username incorrect");
+				LoginMenuPostgres l = new LoginMenuPostgres ();
+				l.login(scanner);
 			}		
-			System.out.println("got user "+use);
 		} catch (UserNotFound e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -14,16 +14,16 @@ public Logger getLog() {
 	}
 public void register(Scanner scanner) {
 
-	log.info("Registering user");
+	//log.info("Registering user");
 	System.out.println("Register an account");
 	System.out.println("Enter a username");
 	String username = scanner.next();
 	System.out.println("Enter a password");
 	String password = scanner.next();
-	//System.out.println("Enter your email");
-	//String email = scanner.next();
-	//System.out.println("Please enter an initial deposit");
-	//String deposit = scanner.next();
+	System.out.println("Enter your email");
+	String email = scanner.next();
+	System.out.println("Please enter an initial deposit");
+	String deposit = scanner.next();
 					
 	User user = new User(username,password);
 	//UserPos kryo = new UserKryo();
@@ -39,8 +39,8 @@ public void register(Scanner scanner) {
 				userPost.createUser(user);
 				
 				//AccountPostgres acc = new AccountPostgres(user);
-				acc.setEmailByUsername("bob123@gmail.com",username);
-				acc.setBalanceByUsername(100,username);
+				acc.setEmailByUsername(email,username);
+				acc.setBalanceByUsername(Integer.valueOf(deposit),username);
 			} catch (UserNameTaken e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -48,7 +48,9 @@ public void register(Scanner scanner) {
 			Menu menu = new Menu();		
 			menu.menu(user,scanner);
 		}else {
-			System.out.println("Taken bud");
+			System.out.println("That Username is unavailable please enter a different one");
+			RegisterMenuPostgres reg = new RegisterMenuPostgres();
+			reg.register(scanner);	
 		}
 	} catch (UserNotFound e1) {
 		// TODO Auto-generated catch block
