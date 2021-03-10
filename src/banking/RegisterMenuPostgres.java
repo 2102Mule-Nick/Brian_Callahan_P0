@@ -30,18 +30,32 @@ public void register(Scanner scanner) {
 	
 	UserPostgres userPost = new UserPostgres();	
 	
+	AccountPostgres acc = new AccountPostgres(user);
+	
 	try {
-		userPost.createUser(user);
-		
-		AccountPostgres acc = new AccountPostgres(user);
-		acc.setEmailByUsername("bob123@gmail.com",username);
-		acc.setBalanceByUsername(100,username);
-	} catch (UserNameTaken e) {
+		if (acc.getUserByUsername(username)==null) {
+			
+			try {
+				userPost.createUser(user);
+				
+				//AccountPostgres acc = new AccountPostgres(user);
+				acc.setEmailByUsername("bob123@gmail.com",username);
+				acc.setBalanceByUsername(100,username);
+			} catch (UserNameTaken e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Menu menu = new Menu();		
+			menu.menu(user,scanner);
+		}else {
+			System.out.println("Taken bud");
+		}
+	} catch (UserNotFound e1) {
 		// TODO Auto-generated catch block
-		e.printStackTrace();
+		e1.printStackTrace();
 	}
-	Menu menu = new Menu();		
-	menu.menu(user,scanner);
+	
+	
 			
 }
 

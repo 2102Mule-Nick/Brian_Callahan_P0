@@ -84,7 +84,6 @@ public class AccountPostgres {
 		
 		//prints table contents
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);){			
-			//String sql = "select balance from accounts";
 			String sql ="select balance from accounts WHERE user_id = (select user_id from users where username = '" + username + "')";
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
@@ -95,7 +94,6 @@ public class AccountPostgres {
 				for (int i = 1; i <= columnsNumber; i++) {
 			        String columnValue = rs.getString(i);
 			        if (columnValue != null) {
-			        	//System.out.println(Integer.valueOf(columnValue));
 			        	return Integer.valueOf(columnValue);
 			        }					        
 			    }					
