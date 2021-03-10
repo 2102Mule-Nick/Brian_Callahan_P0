@@ -28,8 +28,7 @@ public void menu(User user, Scanner scanner) {
 		
 		switch (choice) {
 		case "A": //balance
-			System.out.println("Balance "+user.getBalance());
-			//System.out.println("Balance "+acc.balance);
+			//System.out.println("Balance "+user.getBalance());
 			break;
 		case "B": //deposit
 			System.out.println("Enter an amount to deposit");
@@ -42,7 +41,7 @@ public void menu(User user, Scanner scanner) {
 			acc.withdraw(withdraw);
 			break;
 		case "D": //transactions
-			System.out.println("Transactions: "+user.getTransactions());
+			//System.out.println("Transactions: "+user.getTransactions());
 			break;
 		case "E": //exit
 			System.out.println("Exiting");

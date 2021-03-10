@@ -11,8 +11,8 @@ public class WelcomeMenu {
 		System.out.println("Welcome to the personal banking app");
 		System.out.println("Would you like to login or register?");
 		String welcome = scanner.nextLine();
-		LoginMenu log = new LoginMenu();
-		RegisterMenu reg = new RegisterMenu();
+		LoginMenuPostgres log = new LoginMenuPostgres();
+		RegisterMenuPostgres reg = new RegisterMenuPostgres();
 		reg.setLog(logger);
 		log.setLog(logger);
 		if (welcome.equals("login")) {

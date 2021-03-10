@@ -21,7 +21,7 @@ public void register(Scanner scanner) {
 		System.out.println("Enter a password");
 		String password = scanner.next();
 						
-		User user = new User(username,password,0,"");
+		User user = new User(username,password);
 		UserKryo kryo = new UserKryo();
 		kryo.createUser(user);
 		Menu menu = new Menu();		
