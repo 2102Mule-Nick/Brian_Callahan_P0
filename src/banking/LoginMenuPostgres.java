@@ -23,7 +23,8 @@ public class LoginMenuPostgres {
 		UserPostgres user = new UserPostgres();	
 		
 		try {
-			User use = user.getUserByUsername(username);			
+			User use = user.getUserByUsername(username);
+			if (use!=null) {
 			if (username.equals(use.getUsername()) && password.equals(use.getPassword())){
 				Menu menu = new Menu();			
 				menu.menu(use,scanner);
@@ -31,7 +32,12 @@ public class LoginMenuPostgres {
 				System.out.println("Password or Username incorrect");
 				LoginMenuPostgres l = new LoginMenuPostgres ();
 				l.login(scanner);
-			}		
+			}	
+			}else {
+				System.out.println("Password or Username incorrect");
+				LoginMenuPostgres l = new LoginMenuPostgres ();
+				l.login(scanner);
+			}
 		} catch (UserNotFound e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
