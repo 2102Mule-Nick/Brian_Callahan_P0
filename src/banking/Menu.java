@@ -9,7 +9,8 @@ public class Menu {
 
 public void menu(User user, Scanner scanner) {
 		String choice ="";
-		Account acc = new Account(user); 
+		//Account acc2 = new Account(user); 
+		AccountPostgres acc = new AccountPostgres(user);
 		
 		//Scanner scanner = new Scanner(System.in);		
 		System.out.println();
@@ -28,17 +29,18 @@ public void menu(User user, Scanner scanner) {
 		
 		switch (choice) {
 		case "A": //balance
-			//System.out.println("Balance "+user.getBalance());
+			//acc.getBalanceByUsername(user.getUsername());
+			System.out.println("Balance "+acc.getBalanceByUsername(user.getUsername()));
 			break;
 		case "B": //deposit
 			System.out.println("Enter an amount to deposit");
 			int deposit = scanner.nextInt();
-			acc.deposit(deposit);
+			acc.deposit(deposit,user.getUsername());
 			break;
 		case "C": //withdraw
 			System.out.println("Enter an amount to withdraw");
 			int withdraw = scanner.nextInt();
-			acc.withdraw(withdraw);
+			acc.withdraw(withdraw,user.getUsername());
 			break;
 		case "D": //transactions
 			//System.out.println("Transactions: "+user.getTransactions());

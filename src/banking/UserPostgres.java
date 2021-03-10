@@ -92,5 +92,48 @@ public class UserPostgres {
 		
 		return user;
 	}
+public User getIDByUsername(String username) throws UserNotFound {
+		
+		try {
+			Class.forName("org.postgresql.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Failed to load Driver");
+		}
+
+		User user = null;
+		
+		//String url = "jdbc:postgresql://" + System.getenv("POS_DB_URL") + ":5432/" + "postgres" + "?";
+		
+		//String usr = System.getenv("POS_DB_USERNAME");
+		
+		//String password = System.getenv("POS_DB_PASSWORD");
+		
+		//log.info("usr : " + usr);
+		//log.info("password : " + password);
+		
+		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);) {
+			
+			//conn.setSchema(schema);
+			
+			String sql = "select user_id from users where username = '" + username + "'";
+			
+			Statement stmt = conn.createStatement();
+			
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while (rs.next()) {
+				//log.info("User found in DB");
+				user = new User();
+				user.setUsername(rs.getString("username"));
+				user.setPassword(rs.getString("pass_word"));
+			}
+			
+		} catch (SQLException e) {
+			//log.error("Failure to connect to DB", e);
+		}
+		
+		return user;
+	}
+
 
 }

@@ -50,21 +50,21 @@ public class Driver {
 		}
 		
 		Print pr = new Print();
-		pr.printUsers();
+		//pr.printUsers();
 		System.out.println();
-		pr.printAccounts();
+		pr.printBalance();;
 		
 		
 		System.out.println("done");
 		*/
-		/*
+		
+		
 		BasicConfigurator.configure();
 		Scanner scanner = new Scanner(System.in);
 		WelcomeMenu welcome = new WelcomeMenu();
 		welcome.welcome(scanner);
-		*/
-		AccountPostgres acc = new AccountPostgres();
-		acc.createAccount();
+		
+	
 		
 	}
 }
