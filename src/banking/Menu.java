@@ -29,7 +29,6 @@ public void menu(User user, Scanner scanner) {
 		
 		switch (choice) {
 		case "A": //balance
-			//acc.getBalanceByUsername(user.getUsername());
 			System.out.println("Balance "+acc.getBalanceByUsername(user.getUsername()));
 			break;
 		case "B": //deposit
