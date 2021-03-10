@@ -22,8 +22,14 @@ public void register(Scanner scanner) {
 		String password = scanner.next();
 						
 		User user = new User(username,password);
-		UserKryo kryo = new UserKryo();
-		kryo.createUser(user);
+		UserPostgres post = new UserPostgres();
+		
+		try {
+			post.createUser(user);
+		} catch (UserNameTaken e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Menu menu = new Menu();		
 		menu.menu(user,scanner);
 				

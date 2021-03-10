@@ -24,12 +24,10 @@ public class AccountPostgres {
 		String USERNAME = "postgres";
 		String PASSWORD = "password";
 		String URL = "jdbc:postgresql://localhost:5432/postgres?";
-		
-		//String sql3 = "insert into accounts (email, balance) values ('bob@gmail.com',0)";
-		// works String sql ="UPDATE accounts SET email = '"+email+"', balance= 0 WHERE user_id = 1;";
+
 		String sql ="UPDATE accounts SET email = '"+email+"' WHERE user_id = (select user_id from users where username = '" + username + "')";
 		String sql2 = "select user_id from users where username = '" + username + "'";
-		//String sql = "select * from accounts";
+
 		Connection conn;
 		try {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -53,11 +51,8 @@ public class AccountPostgres {
 		String PASSWORD = "password";
 		String URL = "jdbc:postgresql://localhost:5432/postgres?";
 		
-		//String sql3 = "insert into accounts (email, balance) values ('bob@gmail.com',0)";
-		// works String sql ="UPDATE accounts SET email = '"+email+"', balance= 0 WHERE user_id = 1;";
 		String sql ="UPDATE accounts SET balance = '"+balance+"' WHERE user_id = (select user_id from users where username = '" + username + "')";
-		String sql2 = "select user_id from users where username = '" + username + "'";
-		//String sql = "select * from accounts";
+
 		Connection conn;
 		try {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -82,7 +77,6 @@ public class AccountPostgres {
 		String PASSWORD = "password";
 		String URL = "jdbc:postgresql://localhost:5432/postgres?";
 		
-		//prints table contents
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);){			
 			String sql ="select balance from accounts WHERE user_id = (select user_id from users where username = '" + username + "')";
 			Statement stmt = conn.createStatement();

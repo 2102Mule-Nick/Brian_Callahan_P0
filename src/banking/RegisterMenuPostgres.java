@@ -25,11 +25,8 @@ public void register(Scanner scanner) {
 	System.out.println("Please enter an initial deposit");
 	String deposit = scanner.next();
 					
-	User user = new User(username,password);
-	//UserPos kryo = new UserKryo();
-	
-	UserPostgres userPost = new UserPostgres();	
-	
+	User user = new User(username,password);	
+	UserPostgres userPost = new UserPostgres();		
 	AccountPostgres acc = new AccountPostgres(user);
 	
 	try {
@@ -37,8 +34,6 @@ public void register(Scanner scanner) {
 			
 			try {
 				userPost.createUser(user);
-				
-				//AccountPostgres acc = new AccountPostgres(user);
 				acc.setEmailByUsername(email,username);
 				acc.setBalanceByUsername(Integer.valueOf(deposit),username);
 			} catch (UserNameTaken e) {
@@ -56,9 +51,7 @@ public void register(Scanner scanner) {
 		// TODO Auto-generated catch block
 		e1.printStackTrace();
 	}
-	
-	
-			
+				
 }
 
 }

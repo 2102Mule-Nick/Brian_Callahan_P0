@@ -19,8 +19,8 @@ public class LoginMenu {
 		System.out.println("Enter a username");
 		String username = scanner.next();
 		System.out.println("Enter a password");
-		String password = scanner.next();		
-		UserKryo user = new UserKryo();		
+		String password = scanner.next();
+		UserPostgres user = new UserPostgres();
 		try {
 			User use = user.getUserByUsername(username);
 			if (username.equals(use.getUsername()) && password.equals(use.getPassword())){
