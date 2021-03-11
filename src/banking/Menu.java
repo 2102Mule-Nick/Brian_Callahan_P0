@@ -7,14 +7,14 @@ public class Menu {
 	
 
 
-public void menu(User user, Scanner scanner) {
+public void menu(User user, Scanner scanner) throws UserNotFound {
 		String choice ="";
 		//Account acc2 = new Account(user); 
 		AccountPostgres acc = new AccountPostgres(user);
 		
 		//Scanner scanner = new Scanner(System.in);		
 		System.out.println();
-		System.out.println("Welcome "+user.getUsername());
+		System.out.println("Welcome "+user.getUsername()+" "+acc.getTierByUsername(user.getUsername())+" level");
 		System.out.println("Select an option");
 		System.out.println("A: Balance");
 		System.out.println("B: Deposit");

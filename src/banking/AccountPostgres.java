@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class AccountPostgres {
+	
 	public AccountPostgres(User user) {
 		super();
 		this.user = user;
@@ -21,13 +22,7 @@ public class AccountPostgres {
 	
 
 	public void setEmailByUsername(String email, String username) {		
-		String USERNAME = "postgres";
-		String PASSWORD = "password";
-		String URL = "jdbc:postgresql://localhost:5432/postgres?";
-
 		String sql ="UPDATE accounts SET email = '"+email+"' WHERE user_id = (select user_id from users where username = '" + username + "')";
-		String sql2 = "select user_id from users where username = '" + username + "'";
-
 		Connection conn;
 		try {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -47,9 +42,7 @@ public class AccountPostgres {
 	}
 	
 	public void setBalanceByUsername(int balance, String username) {
-		String USERNAME = "postgres";
-		String PASSWORD = "password";
-		String URL = "jdbc:postgresql://localhost:5432/postgres?";
+		
 		
 		String sql ="UPDATE accounts SET balance = '"+balance+"' WHERE user_id = (select user_id from users where username = '" + username + "')";
 
@@ -72,11 +65,7 @@ public class AccountPostgres {
 		
 	}
 	
-	public int getBalanceByUsername(String username) {
-		String USERNAME = "postgres";
-		String PASSWORD = "password";
-		String URL = "jdbc:postgresql://localhost:5432/postgres?";
-		
+	public int getBalanceByUsername(String username) {		
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);){			
 			String sql ="select balance from accounts WHERE user_id = (select user_id from users where username = '" + username + "')";
 			Statement stmt = conn.createStatement();
@@ -99,11 +88,7 @@ public class AccountPostgres {
 		return 0;
 	}
 	
-	public void deposit(int balance, String username) {
-		String USERNAME = "postgres";
-		String PASSWORD = "password";
-		String URL = "jdbc:postgresql://localhost:5432/postgres?";
-		
+	public void deposit(int balance, String username) {		
 		AccountPostgres acc = new AccountPostgres(user);
 		balance+=acc.getBalanceByUsername(user.getUsername());
 
@@ -128,11 +113,7 @@ public class AccountPostgres {
 		
 	}
 	
-	public void withdraw(int balance, String username) {
-		String USERNAME = "postgres";
-		String PASSWORD = "password";
-		String URL = "jdbc:postgresql://localhost:5432/postgres?";
-		
+	public void withdraw(int balance, String username) {		
 		AccountPostgres acc = new AccountPostgres(user);
 		balance=acc.getBalanceByUsername(user.getUsername())-balance;
 
@@ -189,5 +170,54 @@ public class AccountPostgres {
 		}
 		
 		return user;
+	}
+	
+public String getTierByUsername(String username) throws UserNotFound {
+		
+	try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);){			
+		String sql ="select tier from accounts WHERE user_id = (select user_id from users where username = '" + username + "')";
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
+		ResultSetMetaData rsmd = rs.getMetaData();
+		int columnsNumber = rsmd.getColumnCount();
+		
+		while (rs.next()) {
+			for (int i = 1; i <= columnsNumber; i++) {
+		        String columnValue = rs.getString(i);
+		        if (columnValue != null) {
+		        	return columnValue;
+		        }					        
+		    }					
+		}
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return "";
+	}
+
+public void setTierByUsername(String tier, String username) throws UserNotFound {
+	//AccountPostgres acc = new AccountPostgres(user);
+
+	String sql ="UPDATE accounts SET tier = '"+tier+"' WHERE user_id = (select user_id from users where username = '" + username + "')";
+
+	Connection conn;
+	try {
+		conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+		Statement stmt;
+		try {
+			stmt = conn.createStatement();
+			stmt.executeUpdate(sql);
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	} catch (SQLException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+	
+	
 	}
 }

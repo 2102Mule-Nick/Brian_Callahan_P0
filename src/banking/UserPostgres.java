@@ -20,17 +20,8 @@ public class UserPostgres {
 	public void createUser(User user) throws UserNameTaken {
 		
 		//log.trace("UserDaoPostgres.createUser method called");
-		
-		//Connection conn = ConnectionPostgres.getConnection();
-		
-		String USERNAME = "postgres";
-		String PASSWORD = "password";
-		String URL = "jdbc:postgresql://localhost:5432/postgres?";
-		
-		
+				
 		String sql2 ="WITH ins1 AS (INSERT INTO users(username,pass_word) VALUES ('" + user.getUsername() + "', '" +user.getPassword() + "')" +" RETURNING user_id) INSERT INTO accounts (user_id) SELECT i.user_id FROM   ins1 i;";
-		
-		String sql3 = "insert into users (username, pass_word) values ('" + user.getUsername() + "', '" +user.getPassword() + "')";
 		
 		Connection conn;
 		try {
@@ -100,17 +91,7 @@ public User getIDByUsername(String username) throws UserNotFound {
 			System.out.println("Failed to load Driver");
 		}
 
-		User user = null;
-		
-		//String url = "jdbc:postgresql://" + System.getenv("POS_DB_URL") + ":5432/" + "postgres" + "?";
-		
-		//String usr = System.getenv("POS_DB_USERNAME");
-		
-		//String password = System.getenv("POS_DB_PASSWORD");
-		
-		//log.info("usr : " + usr);
-		//log.info("password : " + password);
-		
+		User user = null;		
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);) {
 			
 			//conn.setSchema(schema);
