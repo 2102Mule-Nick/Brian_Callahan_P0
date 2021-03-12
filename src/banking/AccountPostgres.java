@@ -15,13 +15,11 @@ public class AccountPostgres {
 		this.user = user;
 	}
 
-	//Logger log = Logger.getRootLogger();
 	String URL = "jdbc:postgresql://" + System.getenv("DB_URL") + ":5432/" + "postgres" + "?";
 	String USERNAME = System.getenv("DB_USERNAME");
 	String PASSWORD = System.getenv("DB_PASSWORD");
 	User user;
 	
-
 	public void setEmailByUsername(String email, String username) {		
 		String sql ="UPDATE accounts SET email = ? WHERE user_id = (select user_id from users where username = ?)";
 		Connection conn;

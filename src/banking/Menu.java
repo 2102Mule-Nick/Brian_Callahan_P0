@@ -14,7 +14,6 @@ public void menu(User user, Scanner scanner) throws UserNotFound {
 		System.out.println("A: Balance");
 		System.out.println("B: Deposit");
 		System.out.println("C: Withdraw");
-		System.out.println("D: Transactions");
 		System.out.println("E: Exit");		
 
 		do {
@@ -27,16 +26,26 @@ public void menu(User user, Scanner scanner) throws UserNotFound {
 			break;
 		case "B": //deposit
 			System.out.println("Enter an amount to deposit");
-			Float deposit = scanner.nextFloat();
-			acc.deposit(deposit,user.getUsername());
+			String deposit = scanner.next();
+			
+			try {  
+			    Float.parseFloat(deposit);  
+			    acc.deposit(Float.valueOf(deposit),user.getUsername());
+			  } catch(NumberFormatException e){  
+			    System.out.println("Not a valid entry: Please press 'b' to enter another deposit");
+			  }  
+			
 			break;
 		case "C": //withdraw
 			System.out.println("Enter an amount to withdraw");
-			Float withdraw = scanner.nextFloat();
-			acc.withdraw(withdraw,user.getUsername());
-			break;
-		case "D": //transactions
-			//System.out.println("Transactions: "+user.getTransactions());
+			String withdraw = scanner.next();
+			
+			try {  
+			    Float.parseFloat(withdraw);  
+			    acc.withdraw(Float.valueOf(withdraw),user.getUsername());
+			  } catch(NumberFormatException e){  
+			    System.out.println("Not a valid entry: Please press 'c' to enter another withdrawal");
+			  }  
 			break;
 		case "E": //exit
 			System.out.println("Exiting");
