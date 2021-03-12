@@ -54,7 +54,7 @@ public class AccountPostgres {
 			PreparedStatement stmt;
 			try {
 				stmt = conn.prepareStatement(sql);
-				stmt.setString(1, String.valueOf(balance));
+				stmt.setInt(1, balance);
 				stmt.executeUpdate();
 				conn.close();
 			} catch (SQLException e) {
@@ -199,7 +199,7 @@ public String getTierByUsername(String username) throws UserNotFound {
 
 public void setTierByUsername(String tier, String username) throws UserNotFound {
 	
-	String sql ="UPDATE accounts SET tier = '"+tier+"' WHERE user_id = (select user_id from users where username = '" + username + "')";
+	String sql ="UPDATE accounts SET tier = ? WHERE user_id = (select user_id from users where username = '" + username + "')";
 
 	Connection conn;
 	try {
@@ -207,7 +207,7 @@ public void setTierByUsername(String tier, String username) throws UserNotFound 
 		PreparedStatement stmt;
 		try {
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, String.valueOf(tier));
+			stmt.setString(1, tier);
 			stmt.executeUpdate();
 			conn.close();
 		} catch (SQLException e) {
