@@ -5,14 +5,9 @@ import java.util.Scanner;
 
 public class Menu {
 	
-
-
 public void menu(User user, Scanner scanner) throws UserNotFound {
 		String choice ="";
-		//Account acc2 = new Account(user); 
 		AccountPostgres acc = new AccountPostgres(user);
-		
-		//Scanner scanner = new Scanner(System.in);		
 		System.out.println();
 		System.out.println("Welcome "+user.getUsername()+" "+acc.getTierByUsername(user.getUsername())+" level");
 		System.out.println("Select an option");
@@ -20,10 +15,9 @@ public void menu(User user, Scanner scanner) throws UserNotFound {
 		System.out.println("B: Deposit");
 		System.out.println("C: Withdraw");
 		System.out.println("D: Transactions");
-		System.out.println("E: Exit");
-		
+		System.out.println("E: Exit");		
+
 		do {
-		
 		choice = scanner.next();
 		choice=choice.toUpperCase();
 		
@@ -50,9 +44,6 @@ public void menu(User user, Scanner scanner) throws UserNotFound {
 		default:
 			System.out.println("Please type a valid input");					
 		}	
-		}while (!choice.equalsIgnoreCase("E"));
-		
-		
+		}while (!choice.equalsIgnoreCase("E"));		
 	}
-
 }

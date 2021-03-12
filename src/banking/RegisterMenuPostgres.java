@@ -57,6 +57,5 @@ public void register(Scanner scanner) {
 		e1.printStackTrace();
 	}
 				
-}
-
+	}
 }

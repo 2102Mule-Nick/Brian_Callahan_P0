@@ -19,9 +19,10 @@ public class WelcomeMenu {
 			log.login(scanner);			
 		} else if (welcome.equals("register")) {
 			reg.register(scanner);			
-		}	
-		
-		
+		} else {
+			System.out.println("We didn't quite get that please try again.");
+			WelcomeMenu wel = new WelcomeMenu();
+			wel.welcome(scanner);
+		}			
 	}
-
 }
