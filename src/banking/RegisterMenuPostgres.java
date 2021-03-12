@@ -35,10 +35,10 @@ public void register(Scanner scanner) {
 			try {
 				userPost.createUser(user);
 				acc.setEmailByUsername(email,username);
-				acc.setBalanceByUsername(Integer.valueOf(deposit),username);
-				if(Integer.valueOf(deposit)<1000) {
+				acc.setBalanceByUsername(Float.valueOf(deposit),username);
+				if(Float.valueOf(deposit)<1000) {
 					acc.setTierByUsername("bronze", username);
-				} else if (Integer.valueOf(deposit)<1000) {
+				} else if (Float.valueOf(deposit)<1000) {
 					acc.setTierByUsername("gold", username);
 				}
 			} catch (UserNameTaken e) {

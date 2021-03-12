@@ -16,9 +16,9 @@ public class AccountPostgres {
 	}
 
 	//Logger log = Logger.getRootLogger();
-	String USERNAME = "postgres";
-	String PASSWORD = "password";
-	String URL = "jdbc:postgresql://localhost:5432/postgres?";
+	String URL = "jdbc:postgresql://" + System.getenv("DB_URL") + ":5432/" + "postgres" + "?";
+	String USERNAME = System.getenv("DB_USERNAME");
+	String PASSWORD = System.getenv("DB_PASSWORD");
 	User user;
 	
 
@@ -43,7 +43,7 @@ public class AccountPostgres {
 		}
 	}
 	
-	public void setBalanceByUsername(int balance, String username) {
+	public void setBalanceByUsername(float balance, String username) {
 		
 		
 		String sql ="UPDATE accounts SET balance = ? WHERE user_id = (select user_id from users where username = '" + username + "')";
@@ -54,7 +54,7 @@ public class AccountPostgres {
 			PreparedStatement stmt;
 			try {
 				stmt = conn.prepareStatement(sql);
-				stmt.setInt(1, balance);
+				stmt.setFloat(1, balance);
 				stmt.executeUpdate();
 				conn.close();
 			} catch (SQLException e) {
@@ -68,7 +68,7 @@ public class AccountPostgres {
 		
 	}
 	
-	public int getBalanceByUsername(String username) {		
+	public float getBalanceByUsername(String username) {		
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);){			
 			String sql ="select balance from accounts WHERE user_id = (select user_id from users where username = '" + username + "')";
 			Statement stmt = conn.createStatement();
@@ -80,7 +80,7 @@ public class AccountPostgres {
 				for (int i = 1; i <= columnsNumber; i++) {
 			        String columnValue = rs.getString(i);
 			        if (columnValue != null) {
-			        	return Integer.valueOf(columnValue);
+			        	return Float.valueOf(columnValue);
 			        }					        
 			    }					
 			}
@@ -91,7 +91,7 @@ public class AccountPostgres {
 		return 0;
 	}
 	
-	public void deposit(int balance, String username) {		
+	public void deposit(float balance, String username) {		
 		AccountPostgres acc = new AccountPostgres(user);
 		balance+=acc.getBalanceByUsername(user.getUsername());
 
@@ -116,7 +116,7 @@ public class AccountPostgres {
 		
 	}
 	
-	public void withdraw(int balance, String username) {		
+	public void withdraw(float balance, String username) {		
 		AccountPostgres acc = new AccountPostgres(user);
 		balance=acc.getBalanceByUsername(user.getUsername())-balance;
 
@@ -128,7 +128,7 @@ public class AccountPostgres {
 			PreparedStatement stmt;
 			try {
 				stmt = conn.prepareStatement(sql);
-				stmt.setInt(1, balance);
+				stmt.setFloat(1, balance);
 				stmt.executeUpdate();
 				conn.close();
 			} catch (SQLException e) {

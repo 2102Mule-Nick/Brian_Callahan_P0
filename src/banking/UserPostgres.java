@@ -11,22 +11,11 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 public class UserPostgres {
-	
-	//Logger log = Logger.getRootLogger();
-	//String USERNAME = "postgres";
-	//String PASSWORD = "password";
-	//String URL = "jdbc:postgresql://localhost:5432/postgres?";
-	
+
 	String URL = "jdbc:postgresql://" + System.getenv("DB_URL") + ":5432/" + "postgres" + "?";
-	
 	String USERNAME = System.getenv("DB_USERNAME");
-	
 	String PASSWORD = System.getenv("DB_PASSWORD");
-	
-	
-	
-	
-	
+		
 	public void createUser(User user) throws UserNameTaken {
 		
 		//log.trace("UserDaoPostgres.createUser method called");

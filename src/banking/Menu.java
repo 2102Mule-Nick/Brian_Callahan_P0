@@ -27,12 +27,12 @@ public void menu(User user, Scanner scanner) throws UserNotFound {
 			break;
 		case "B": //deposit
 			System.out.println("Enter an amount to deposit");
-			int deposit = scanner.nextInt();
+			Float deposit = scanner.nextFloat();
 			acc.deposit(deposit,user.getUsername());
 			break;
 		case "C": //withdraw
 			System.out.println("Enter an amount to withdraw");
-			int withdraw = scanner.nextInt();
+			Float withdraw = scanner.nextFloat();
 			acc.withdraw(withdraw,user.getUsername());
 			break;
 		case "D": //transactions
