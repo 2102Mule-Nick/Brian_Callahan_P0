@@ -8,7 +8,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 public class UserPostgres {
+	Logger log;
+public Logger getLog() {
+		return log;
+	}
+	public void setLog(Logger log) {
+		this.log = log;
+	}
 
 	String URL = "jdbc:postgresql://" + System.getenv("DB_URL") + ":5432/" + "postgres" + "?";
 	String USERNAME = System.getenv("DB_USERNAME");
@@ -16,8 +25,7 @@ public class UserPostgres {
 		
 	public void createUser(User user) throws UserNameTaken {
 		
-		//log.trace("UserDaoPostgres.createUser method called");
-				
+		log.trace("UserPostgres.createUser method called");
 		String sql ="WITH ins1 AS (INSERT INTO users(username,pass_word) VALUES (?, ?) RETURNING user_id) INSERT INTO accounts (user_id) SELECT i.user_id FROM   ins1 i;";
 		
 		Connection conn;
@@ -47,27 +55,20 @@ public class UserPostgres {
 			System.out.println("Failed to load Driver");
 		}
 
-		User user = null;
-		
-		//String url = "jdbc:postgresql://" + System.getenv("POS_DB_URL") + ":5432/" + "postgres" + "?";
-		//String usr = System.getenv("POS_DB_USERNAME");
-		//String password = System.getenv("POS_DB_PASSWORD");		
-		//log.info("usr : " + usr);
-		//log.info("password : " + password);
-		
+		User user = null;		
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);) {
 			String sql = "select * from users where username = '" + username + "'";			
 			Statement stmt = conn.createStatement();			
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while (rs.next()) {
-				//log.info("User found in DB");
+				log.info("User found in DB");
 				user = new User();
 				user.setUsername(rs.getString("username"));
 				user.setPassword(rs.getString("pass_word"));
 			}			
 		} catch (SQLException e) {
-			//log.error("Failure to connect to DB", e);
+			log.error("Failure to connect to DB", e);
 		}		
 		return user;
 	}

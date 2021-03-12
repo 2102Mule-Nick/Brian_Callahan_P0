@@ -20,6 +20,7 @@ public class WelcomeMenu {
 		if (welcome.equals("login")) {
 			log.login(scanner);			
 		} else if (welcome.equals("register")) {
+			reg.setLog(logger);
 			reg.register(scanner);			
 		} else {
 			System.out.println("We didn't quite get that please try again.");

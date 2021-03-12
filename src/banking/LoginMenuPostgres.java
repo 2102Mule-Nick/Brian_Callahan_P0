@@ -9,9 +9,6 @@ import org.apache.log4j.Logger;
 public class LoginMenuPostgres {
 	
 	Logger log;
-	public Logger getLog() {
-		return log;
-	}
 	public void setLog(Logger log) {
 		this.log = log;
 	}
@@ -23,7 +20,7 @@ public class LoginMenuPostgres {
 		System.out.println("Enter a password");
 		String password = scanner.next();		
 		UserPostgres user = new UserPostgres();	
-		
+		user.setLog(log);
 		try {
 			User use = user.getUserByUsername(username);
 			if (use!=null) {
@@ -46,7 +43,7 @@ public class LoginMenuPostgres {
 			}
 		} catch (UserNotFound e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.warn("User not found",e);
 		}		
 	}
 

@@ -7,12 +7,9 @@ import org.apache.log4j.Logger;
 
 public class RegisterMenuPostgres {
 	Logger log;
-public Logger getLog() {
-		return log;
-	}
-	public void setLog(Logger log) {
+public void setLog(Logger log) {
 		this.log = log;
-	}
+}
 	
 public void register(Scanner scanner) {
 
@@ -28,7 +25,8 @@ public void register(Scanner scanner) {
 	String deposit = scanner.next();
 					
 	User user = new User(username,password);	
-	UserPostgres userPost = new UserPostgres();		
+	UserPostgres userPost = new UserPostgres();	
+	userPost.setLog(log);
 	AccountPostgres acc = new AccountPostgres(user);
 	
 	try {
@@ -45,18 +43,20 @@ public void register(Scanner scanner) {
 				}
 			} catch (UserNameTaken e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				log.warn("User Taken",e);
 			}
 			Menu menu = new Menu();		
 			menu.menu(user,scanner);
 		}else {
+			log.info("User not available");
 			System.out.println("That Username is unavailable please enter a different one");
 			RegisterMenuPostgres reg = new RegisterMenuPostgres();
+			reg.setLog(log);
 			reg.register(scanner);	
 		}
 	} catch (UserNotFound e1) {
 		// TODO Auto-generated catch block
-		e1.printStackTrace();
+		log.warn("User not found",e1);
 	}
 				
 	}
