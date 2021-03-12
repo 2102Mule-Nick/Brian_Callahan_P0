@@ -23,14 +23,15 @@ public class AccountPostgres {
 	
 
 	public void setEmailByUsername(String email, String username) {		
-		String sql ="UPDATE accounts SET email = ? WHERE user_id = (select user_id from users where username = '" + username + "')";
+		String sql ="UPDATE accounts SET email = ? WHERE user_id = (select user_id from users where username = ?)";
 		Connection conn;
 		try {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			PreparedStatement stmt;
 			try {
 				stmt = conn.prepareStatement(sql);
-				stmt.setString(1, username);
+				stmt.setString(1, email);
+				stmt.setString(2, username);
 				stmt.executeUpdate();
 				conn.close();
 			} catch (SQLException e) {
@@ -46,7 +47,7 @@ public class AccountPostgres {
 	public void setBalanceByUsername(float balance, String username) {
 		
 		
-		String sql ="UPDATE accounts SET balance = ? WHERE user_id = (select user_id from users where username = '" + username + "')";
+		String sql ="UPDATE accounts SET balance = ? WHERE user_id = (select user_id from users where username = ?)";
 
 		Connection conn;
 		try {
@@ -55,6 +56,7 @@ public class AccountPostgres {
 			try {
 				stmt = conn.prepareStatement(sql);
 				stmt.setFloat(1, balance);
+				stmt.setString(2, username);
 				stmt.executeUpdate();
 				conn.close();
 			} catch (SQLException e) {
@@ -70,9 +72,11 @@ public class AccountPostgres {
 	
 	public float getBalanceByUsername(String username) {		
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);){			
-			String sql ="select balance from accounts WHERE user_id = (select user_id from users where username = '" + username + "')";
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
+			String sql ="select balance from accounts WHERE user_id = (select user_id from users where username = ?)";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, username);
+			
+			ResultSet rs = stmt.executeQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int columnsNumber = rsmd.getColumnCount();
 			
@@ -95,15 +99,17 @@ public class AccountPostgres {
 		AccountPostgres acc = new AccountPostgres(user);
 		balance+=acc.getBalanceByUsername(user.getUsername());
 
-		String sql ="UPDATE accounts SET balance = '"+balance+"' WHERE user_id = (select user_id from users where username = '" + username + "')";
+		String sql ="UPDATE accounts SET balance = ? WHERE user_id = (select user_id from users where username = ?)";
 
 		Connection conn;
 		try {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			Statement stmt;
+			PreparedStatement stmt;
 			try {
-				stmt = conn.createStatement();
-				stmt.executeUpdate(sql);
+				stmt = conn.prepareStatement(sql);
+				stmt.setFloat(1, balance);
+				stmt.setString(2, username);
+				stmt.executeUpdate();
 				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -120,7 +126,7 @@ public class AccountPostgres {
 		AccountPostgres acc = new AccountPostgres(user);
 		balance=acc.getBalanceByUsername(user.getUsername())-balance;
 
-		String sql ="UPDATE accounts SET balance = ? WHERE user_id = (select user_id from users where username = '" + username + "')";
+		String sql ="UPDATE accounts SET balance = ? WHERE user_id = (select user_id from users where username = ?)";
 
 		Connection conn;
 		try {
@@ -129,6 +135,7 @@ public class AccountPostgres {
 			try {
 				stmt = conn.prepareStatement(sql);
 				stmt.setFloat(1, balance);
+				stmt.setString(2, username);
 				stmt.executeUpdate();
 				conn.close();
 			} catch (SQLException e) {
@@ -153,12 +160,14 @@ public class AccountPostgres {
 		User user = null;
 				
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);) {
-			String sql = "select * from users where username = '" + username + "'";
+			String sql = "select * from users where username = ?";
+						
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, username);
 			
-			Statement stmt = conn.createStatement();
-			
-			ResultSet rs = stmt.executeQuery(sql);
-			
+			ResultSet rs = stmt.executeQuery();
+			conn.close();
+		
 			while (rs.next()) {
 				//log.info("User found in DB");
 				user = new User();
@@ -176,9 +185,11 @@ public class AccountPostgres {
 public String getTierByUsername(String username) throws UserNotFound {
 		
 	try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);){			
-		String sql ="select tier from accounts WHERE user_id = (select user_id from users where username = '" + username + "')";
-		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery(sql);
+		String sql ="select tier from accounts WHERE user_id = (select user_id from users where username = ?)";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, username);
+		
+		ResultSet rs = stmt.executeQuery();
 		ResultSetMetaData rsmd = rs.getMetaData();
 		int columnsNumber = rsmd.getColumnCount();
 		
@@ -199,7 +210,7 @@ public String getTierByUsername(String username) throws UserNotFound {
 
 public void setTierByUsername(String tier, String username) throws UserNotFound {
 	
-	String sql ="UPDATE accounts SET tier = ? WHERE user_id = (select user_id from users where username = '" + username + "')";
+	String sql ="UPDATE accounts SET tier = ? WHERE user_id = (select user_id from users where username = ?)";
 
 	Connection conn;
 	try {
@@ -208,6 +219,7 @@ public void setTierByUsername(String tier, String username) throws UserNotFound 
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, tier);
+			stmt.setString(2, username);
 			stmt.executeUpdate();
 			conn.close();
 		} catch (SQLException e) {

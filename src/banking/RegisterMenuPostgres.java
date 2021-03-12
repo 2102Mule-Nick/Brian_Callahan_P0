@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 
+
 public class RegisterMenuPostgres {
 	Logger log;
 public Logger getLog() {
@@ -12,9 +13,10 @@ public Logger getLog() {
 	public void setLog(Logger log) {
 		this.log = log;
 	}
+	
 public void register(Scanner scanner) {
 
-	//log.info("Registering user");
+	log.info("Registering user");
 	System.out.println("Register an account");
 	System.out.println("Enter a username");
 	String username = scanner.next();

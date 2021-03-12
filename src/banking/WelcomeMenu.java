@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 
+
+
 public class WelcomeMenu {
 	Logger logger = Logger.getRootLogger();
 	

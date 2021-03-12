@@ -4,7 +4,10 @@ import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 
+
+
 public class LoginMenuPostgres {
+	
 	Logger log;
 	public Logger getLog() {
 		return log;
@@ -12,8 +15,9 @@ public class LoginMenuPostgres {
 	public void setLog(Logger log) {
 		this.log = log;
 	}
+
 	public void login(Scanner scanner) {	
-		//log.info("Logging in user");
+		log.info("Logging in user");
 		System.out.println("Enter a username");
 		String username = scanner.next();
 		System.out.println("Enter a password");
@@ -27,13 +31,17 @@ public class LoginMenuPostgres {
 				Menu menu = new Menu();			
 				menu.menu(use,scanner);
 			} else {
+				log.info("Password or Username incorrect");
 				System.out.println("Password or Username incorrect");
 				LoginMenuPostgres l = new LoginMenuPostgres ();
+				l.setLog(log);
 				l.login(scanner);
 			}	
 			}else {
-				System.out.println("Password or Username incorrect");
+				log.info("User does not exist");
+				System.out.println("User does not exist");
 				LoginMenuPostgres l = new LoginMenuPostgres ();
+				l.setLog(log);
 				l.login(scanner);
 			}
 		} catch (UserNotFound e) {
